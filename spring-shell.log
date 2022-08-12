@@ -1,3 +1,5 @@
 1659926671217:make-request
 1659930826005:make-get-request -s http://localhost:5050/api/family
 1659930874374:make-get-request -s http://localhost:5050/api/family/1?32
+1660184670488:make_get_request_list -s http://localhost:5050/api/family
+1660184704336:make-get-request-list -s http://localhost:5050/api/family

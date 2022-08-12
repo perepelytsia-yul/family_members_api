@@ -5,6 +5,7 @@ import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 import static java.lang.String.format;
@@ -18,6 +19,12 @@ public class SSHCommand {
     @ShellMethod(value = "make a get request with params")
     public String makeGetRequest(@ShellOption(value = "-s") String endpoint) {
         return sendRequestsService.getPostsPlainJSON(endpoint);
+    }
+
+    @ShellMethod(value = "make a get request with params")
+    public List makeGetRequestList(@ShellOption(value = "-s") String endpoint) {
+        FluxFromIterable.main(sendRequestsService.getListResponse(endpoint));
+        return sendRequestsService.getListResponse(endpoint);
     }
 
 }

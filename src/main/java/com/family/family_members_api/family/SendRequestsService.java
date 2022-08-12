@@ -4,6 +4,8 @@ import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
+
 @Service
 public class SendRequestsService {
 
@@ -15,5 +17,9 @@ public class SendRequestsService {
 
     public String getPostsPlainJSON(String url) {
         return this.restTemplate.getForObject(url, String.class);
+    }
+
+    public List getListResponse(String url) {
+        return this.restTemplate.getForObject(url, List.class);
     }
 }
