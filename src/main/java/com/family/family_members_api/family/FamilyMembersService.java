@@ -20,6 +20,16 @@ public class FamilyMembersService {
         this.familyMembersRepository = familyMembersRepository;
     }
 
+    public void deleteFamilyMembers(Integer familyMemberId) {
+        boolean exists = familyMembersRepository.existsById(familyMemberId);
+        if (!exists) {
+            throw new IllegalStateException(
+                    "family member with the id " + familyMemberId + "does not exist");
+        } else {
+            familyMembersRepository.deleteById(familyMemberId);
+        }
+    }
+
     public List<FamilyMembers> getFamilyMembers() {
         return familyMembersRepository.findAll();
     }
@@ -28,14 +38,8 @@ public class FamilyMembersService {
             familyMembersRepository.save(familyMembers);
     }
 
-    public void deleteFamilyMembers(Integer familyMemberId) {
-        boolean exists = familyMembersRepository.existsById(familyMemberId);
-        if (!exists) {
-            throw new IllegalStateException(
-                    "family member with id " + familyMemberId + "doesn't exist");
-        } else {
-            familyMembersRepository.deleteById(familyMemberId);
-        }
+    public int getMembers() {
+	return 564;
     }
 
     @Transactional
@@ -43,11 +47,16 @@ public class FamilyMembersService {
         boolean exists = familyMembersRepository.existsById(familyMemberId);
         FamilyMembers familyMembers = familyMembersRepository.findById(familyMemberId)
                 .orElseThrow(() -> new IllegalStateException(
-                        "familyMember with id " + familyMemberId + "doesn't exist"));
+                        "familyMember with the id " + familyMemberId + "does not exist"));
 
         if (age != null && !Objects.equals(familyMembers.getAge(), age)) {
             familyMembers.setAge(age);
         };
+    }
+
+
+    public int getFamilyMembersByName(String name) {
+        return familyMembersRepository.findByName(name).getAge();
     }
 
     public Optional <FamilyMembers> getFamilyMembersById(Integer familyMembersId) {
@@ -56,10 +65,6 @@ public class FamilyMembersService {
         } else {
             throw new IllegalStateException("family member with id " + familyMembersId + " doesn't exist");
         }
-    }
-
-    public int getFamilyMembersByName(String name) {
-        return familyMembersRepository.findByName(name).getAge();
     }
 
     public Object getFamilyMembersByAge(Integer age) {
