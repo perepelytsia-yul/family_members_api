@@ -32,7 +32,7 @@ public class FamilyMembersService {
         boolean exists = familyMembersRepository.existsById(familyMemberId);
         if (!exists) {
             throw new IllegalStateException(
-                    "family member with id " + familyMemberId + "doesn't exist");
+                    "Smth went wrong. Family member with id " + familyMemberId + "doesn't exist");
         } else {
             familyMembersRepository.deleteById(familyMemberId);
         }
